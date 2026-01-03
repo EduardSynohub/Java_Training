@@ -38,7 +38,7 @@ public class Calculator {
         return result;
     }
 
-    public void autoIncrement (String element) {
+    private void autoIncrement (String element) {
         historyOfOperations = Arrays.copyOf(historyOfOperations, historyOfOperations.length + 1);
         historyOfOperations[historyOfOperations.length - 1] = element;
     }
