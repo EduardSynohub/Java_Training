@@ -1,6 +1,6 @@
 package eduard.OOP_and_MYSQL.OOP.constructor;
 
-public class Test {
+public class Task1 {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
         double num1 = 5.0;
@@ -10,9 +10,12 @@ public class Test {
         calculator.multiply(num1, num2);
         calculator.subtract(num1, num2);
         calculator.divide(num1, num3);
+        calculator.add(num1, num3);
+        calculator.multiply(num1, num3);
         calculator.printOperations();
-        System.out.println("--------------------------");
+        System.out.println("-------------------------------------");
         calculator.clearOperations();
+        calculator.add(num1, num2);
         calculator.printOperations();
     }
 }
