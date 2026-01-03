@@ -30,14 +30,13 @@ public class BankAccount {
         if (amount <= 0) {
             System.out.println("The amount of money entered must be greater than 0!");
             return 0;
-        } else {
-            if (amount > cash) {
-                System.out.println("The amount entered is greater than the account balance. " + cash + " zł has been withdrawn.");
-                double result = cash;
-                cash = 0.0;
-                return result;
-            }
+        } else if (amount > cash) {
+            System.out.println("The amount entered is greater than the account balance. " + cash + " zł has been withdrawn.");
+            double result = cash;
+            cash = 0.0;
+            return result;
         }
+
         cash -= amount;
         System.out.println(amount + " zł has been withdrawn.");
         return amount;
