@@ -34,5 +34,9 @@ public class TestCalculator {
         advancedCalculator.root(3, 6);
         advancedCalculator.pow(5, 2);
         advancedCalculator.printGlobalOperations();
+
+        System.out.println("---------------------------------------");
+
+        advancedCalculator.printGlobalOperations(8);
     }
 }

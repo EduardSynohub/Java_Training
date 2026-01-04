@@ -23,4 +23,17 @@ public class AdvancedCalculator extends Calculator {
         addToGlobalHistory("The area of a circle with a given radius of " + r + " equals " + result);
         return result;
     }
+
+    public static void printGlobalOperations(int length) {
+        int count = 0;
+
+        for (int i = globalHistoryOfOperations.length - 1; i >= 0; i--) {
+            if (count == length) {
+                break;
+            } else {
+                System.out.println(globalHistoryOfOperations[i]);
+                count++;
+            }
+        }
+    }
 }
