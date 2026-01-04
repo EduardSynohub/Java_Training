@@ -28,5 +28,11 @@ public class TestCalculator {
         advancedCalculator.pow(3, 5);
         advancedCalculator.root(16, 4);
         advancedCalculator.printOperations();
+
+        System.out.println("--------------------------------------");
+
+        advancedCalculator.root(3, 6);
+        advancedCalculator.pow(5, 2);
+        advancedCalculator.printGlobalOperations();
     }
 }
