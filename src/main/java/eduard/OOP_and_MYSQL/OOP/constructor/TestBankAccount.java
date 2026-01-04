@@ -1,6 +1,6 @@
 package eduard.OOP_and_MYSQL.OOP.constructor;
 
-public class Task3 {
+public class TestBankAccount {
     public static void main(String[] args) {
         BankAccount bankAccount = new BankAccount(765484);
         bankAccount.depositCash(20000.0);

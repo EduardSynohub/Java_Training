@@ -1,6 +1,6 @@
 package eduard.OOP_and_MYSQL.OOP.constructor;
 
-public class Task2 {
+public class TestPerson {
     public static void main(String[] args) {
         Person spiderman = new Person("Peter", "Parker", 21, 'M');
         System.out.println(spiderman);
