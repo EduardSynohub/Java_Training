@@ -26,22 +26,26 @@ public class ShoppingCart {
 
     public void removeProduct(Product product) {
         CartItem[] toRemoveItem = new CartItem[0];
+
         for (CartItem cartItem : cartItems) {
             if (!cartItem.getProduct().equals(product)) {
                 toRemoveItem = Arrays.copyOf(toRemoveItem, toRemoveItem.length + 1);
                 toRemoveItem[toRemoveItem.length - 1] = cartItem;
             }
         }
+
         cartItems = toRemoveItem;
     }
 
     public void updateProduct(Product product, int quantity) {
         checkQuantity(quantity);
+
             for (int i = 0; i < cartItems.length; i++) {
                 if (cartItems[i].getProduct().getId() == product.getId()) {
                     cartItems[i] = new CartItem(product, quantity);
                 }
             }
+
             if (quantity == 0) {
                 removeProduct(product);
             }
@@ -59,16 +63,20 @@ public class ShoppingCart {
 
     public double getTotalSum() {
         double sum = 0.0;
+
         for (CartItem cartItem : cartItems) {
             sum += (cartItem.getProduct().getPrice() * cartItem.getQuantity());
         }
+
         return sum;
     }
 
     public void printReceipt() {
         StringBuilder stringBuilder = new StringBuilder();
+
         for (int i  = 0; i < cartItems.length; i++) {
             double sum = cartItems[i].getQuantity() * cartItems[i].getProduct().getPrice();
+
             stringBuilder
                     .append(i + 1)
                     .append(": ")
@@ -83,6 +91,7 @@ public class ShoppingCart {
                     .append(sum)
                     .append("\n");
         }
+
         System.out.print(stringBuilder);
         System.out.println("---------------------------------------");
         System.out.println("Razem: " + getTotalSum());
