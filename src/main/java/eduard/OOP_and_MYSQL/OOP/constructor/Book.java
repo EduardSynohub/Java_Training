@@ -1,11 +1,15 @@
 package eduard.OOP_and_MYSQL.OOP.constructor;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Book {
     private int id;
     private String title;
     private boolean available = true;
     private Author author;
     private Author[] additionalAuthors;
+    private int popularity;
 
     public Book(int id, String title) {
         this.id = id;
@@ -23,6 +27,22 @@ public class Book {
         this.title = title;
         this.author = author;
         this.additionalAuthors = additionalAuthors;
+    }
+
+    void borrow() {
+        popularity++;
+        available = false;
+    }
+
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        } else if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+
+        Book book = (Book) object;
+        return id == book.id;
     }
 
     public int getId() {
@@ -63,5 +83,25 @@ public class Book {
 
     public void setAdditionalAuthors(Author[] additionalAuthors) {
         this.additionalAuthors = additionalAuthors;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", available=" + available +
+                ", author=" + author +
+                ", additionalAuthors=" + Arrays.toString(additionalAuthors) +
+                ", popularity=" + popularity +
+                '}';
     }
 }

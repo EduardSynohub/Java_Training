@@ -1,40 +1,11 @@
 package eduard.OOP_and_MYSQL.OOP.constructor;
 
-public class Author {
-    private int id;
-    private String firstName;
-    private String lastName;
+public class Author extends Person{
     private String pseudonim;
 
-    public Author(int id, String firstName, String lastName, String pseudonim) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Author(String name, String surname, String pseudonim) {
+        super(name, surname);
         this.pseudonim = pseudonim;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getPseudonim() {
@@ -48,10 +19,7 @@ public class Author {
     @Override
     public String toString() {
         return "Author{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", pseudonim='" + pseudonim + '\'' +
+                "pseudonim='" + pseudonim + '\'' +
                 '}';
     }
 }

@@ -2,21 +2,41 @@ package eduard.OOP_and_MYSQL.OOP.constructor;
 
 import java.util.Arrays;
 
-public class User {
-    private int id;
-    private String firstName;
-    private String lastName;
+public class User extends Person{
     private Book[] books;
 
-    public User(int id, String firstName, String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.books = new Book[0];
+    public User(String name, String surname, Book[] books) {
+        super(name, surname);
+        this.books = books;
     }
+
 
     protected void addBook (Book book) {
         books = Arrays.copyOf(books, books.length + 1);
         books[books.length - 1] = book;
+        book.borrow();
+    }
+
+    protected void returnBook(Book book) {
+        Book[] toRemoveBook = new Book[0];
+
+        for (Book value : books) {
+            if (!book.equals(value)) {
+                toRemoveBook = Arrays.copyOf(toRemoveBook, toRemoveBook.length + 1);
+                toRemoveBook[toRemoveBook.length - 1] = value;
+            } else {
+                value.setAvailable(true);
+            }
+        }
+
+        books = toRemoveBook;
+    }
+
+    public void returnAllBooks() {
+        for (Book book : books) {
+            book.setAvailable(true);
+        }
+
+        books = new Book[0];
     }
 }

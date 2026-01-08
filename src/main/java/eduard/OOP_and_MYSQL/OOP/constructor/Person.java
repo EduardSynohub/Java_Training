@@ -1,26 +1,19 @@
 package eduard.OOP_and_MYSQL.OOP.constructor;
 
 public class Person {
+    private int PERSON_ID = 100;
+    private int id;
     private String name;
     private String surname;
-    private int age;
-    private char gender;
-
-    public Person(String name, String surname, int age, char gender) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        this.gender = gender;
-    }
 
     public Person(String name, String surname) {
+        this.id = PERSON_ID++;
         this.name = name;
         this.surname = surname;
     }
 
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -39,29 +32,12 @@ public class Person {
         this.surname = surname;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public char getGender() {
-        return gender;
-    }
-
-    public void setGender(char gender) {
-        this.gender = gender;
-    }
-
     @Override
     public String toString() {
         return "Person{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", age=" + age +
-                ", gender=" + gender +
                 '}';
     }
 }
