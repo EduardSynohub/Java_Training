@@ -1,6 +1,5 @@
 package eduard.OOP_and_MYSQL.OOP.constructor;
 
-import java.util.Arrays;
 
 public class TestBook {
     public static void main(String[] args) {
