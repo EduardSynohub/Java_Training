@@ -1,7 +1,6 @@
 package eduard.OOP_and_MYSQL.OOP.constructor;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Book {
     private int id;
