@@ -5,9 +5,9 @@ import java.util.Arrays;
 public class User extends Person{
     private Book[] books;
 
-    public User(String name, String surname, Book[] books) {
+    public User(String name, String surname) {
         super(name, surname);
-        this.books = books;
+        this.books = new Book[0];
     }
 
 
@@ -38,5 +38,16 @@ public class User extends Person{
         }
 
         books = new Book[0];
+    }
+
+    public Book[] getBooks() {
+        return books;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "books=" + Arrays.toString(books) +
+                '}';
     }
 }
