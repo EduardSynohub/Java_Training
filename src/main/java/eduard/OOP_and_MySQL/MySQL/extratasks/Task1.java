@@ -1,6 +1,6 @@
 package eduard.OOP_and_MySQL.MySQL.extratasks;
 
-public class Main {
+public class Task1 {
     public static final String QUERY_1 = "SELECT * FROM users\n" +
             "         WHERE name LIKE 'Julia %';";
     public static final String QUERY_2 = "SELECT * FROM users\n" +
