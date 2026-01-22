@@ -18,7 +18,6 @@ public class Task10 {
             "JOIN cinemas_movies cm on c.id = cm.cinema_id\n" +
             "JOIN movies m on m.id = cm.movie_id\n" +
             "WHERE c.id = ?";
-    public static List<Integer> MOVIES_ID_LIST = new ArrayList<>();
     public static final String ALL_SCREENINGS_FOR_MOVIE_QUERY = "SELECT s.show_time FROM screenings s\n" +
             "         JOIN cinemas c on c.id = s.cinema_id\n" +
             "WHERE s.movie_id = ? AND c.id = ?";
@@ -33,20 +32,24 @@ public class Task10 {
 
             if (!checkCinemaId(connection, cinemaId)) {
                 System.out.println("Cinema with ID " + cinemaId + " doesn't exist!");
-            } else {
-                showAllMoviesInCinema(connection, cinemaId);
+            }
+
+            List<Integer> movieIds = showAllMoviesInCinema(connection, cinemaId);
+
+            if (movieIds.isEmpty()) {
+                return;
             }
 
             int movieId = readId(scanner, "\nPlease enter movie ID: ");
 
-            for (int i : MOVIES_ID_LIST) {
-                if (movieId == i) {
-                    showAllScreeningForMovie(connection, movieId, cinemaId);
-                }
+            if (!movieIds.contains(movieId)) {
+                System.out.println("This movie does not belong to selected cinema!");
+                return;
             }
 
+            showAllScreeningsForMovie(connection, movieId, cinemaId);
         } catch (SQLException e) {
-            System.out.println("First ops... " + e.getMessage());
+            System.out.println("Database error: " + e.getMessage());
         }
     }
     public static void showAllCinemas(Connection conn) throws SQLException {
@@ -71,29 +74,31 @@ public class Task10 {
         }
     }
 
-    public static void showAllMoviesInCinema(Connection connection, int cinemaId) {
-        MOVIES_ID_LIST.clear();
+    public static List<Integer> showAllMoviesInCinema(Connection connection, int cinemaId) {
+        List<Integer> movieIdList = new ArrayList<>();
 
         try (PreparedStatement ps = connection.prepareStatement(ALL_MOVIES_IN_CINEMA_QUERY)) {
             ps.setInt(1, cinemaId);
             ResultSet rs = ps.executeQuery();
 
-            boolean showMovie = false;
+            boolean hasMovie = false;
 
             while (rs.next()) {
-                if (!showMovie) {
-                    System.out.println("All movies in that cinema:");
-                    showMovie = true;
+                if (!hasMovie) {
+                    System.out.println("\nMovies in selected cinema:");
+                    hasMovie = true;
                 }
-                System.out.println("Movie: " + rs.getString(1) + " with ID " + rs.getInt(2));
-                MOVIES_ID_LIST.add(rs.getInt(2));
+                System.out.println("Movie ID: " + rs.getInt(2) + " | Title: " + rs.getString(1));
+                movieIdList.add(rs.getInt(2));
             }
-                if (!showMovie) {
-                    System.out.println("In that cinema we don`t have any movies!");
+                if (!hasMovie) {
+                    System.out.println("This cinema has no movies.");
                 }
         } catch (SQLException e) {
-            System.out.println("Second ops... " + e.getMessage());
+            System.out.println("Error loading movies: " + e.getMessage());
         }
+
+        return movieIdList;
     }
     private static int readId(Scanner scanner, String message) {
         while (true) {
@@ -107,16 +112,28 @@ public class Task10 {
             }
         }
     }
-    private static void showAllScreeningForMovie(Connection connection, int movieId, int cinemaId) {
+    private static void showAllScreeningsForMovie(Connection connection, int movieId, int cinemaId) {
         try (PreparedStatement ps = connection.prepareStatement(ALL_SCREENINGS_FOR_MOVIE_QUERY)) {
             ps.setInt(1, movieId);
             ps.setInt(2, cinemaId);
             ResultSet rs = ps.executeQuery();
+
+            boolean hasScreenings = false;
+
             while (rs.next()) {
-                System.out.println(" Show time: " + rs.getString(1));
+                if (!hasScreenings) {
+                    System.out.println("\nScreenings:");
+                    hasScreenings = true;
+                }
+                System.out.println("Show time: " + rs.getString(1));
             }
+
+            if (!hasScreenings) {
+                System.out.println("No screenings for this movie in this cinema.");
+            }
+
         } catch (SQLException e) {
-            System.out.println("Third ops... " + e.getMessage());
+            System.out.println("Error loading screenings: " + e.getMessage());
         }
     }
 }
