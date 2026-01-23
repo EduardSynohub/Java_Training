@@ -7,7 +7,21 @@
 /dataSources/
 /dataSources.local.xml
 
-target/
-.idea/
+target/*
+.settings/*
+.classpath
+.project
+.factorypath
+.attach_pid*
+.idea
 *.iml
+/target
+_site/
 
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+.idea/
+.eclipse
