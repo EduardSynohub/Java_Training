@@ -2,6 +2,7 @@ package eduard.OOP_and_MySQL.MySQL.extratasks;
 
 public class FootballTasks {
     public static final String QUERY_1 = "SELECT * FROM Teams\n" +
+            "         ORDER BY points DESC\n" +
             "         LIMIT 1";
     public static final String QUERY_2 = "SELECT * FROM Teams\n" +
             "    ORDER BY points DESC";
